@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111725">
+  <meta name="description" content="星轨跑酷：在城市轨道间奔跑，躲开列车、跳过路障、滑过横杆，收集金币并挑战自己的纪录。支持键盘和触屏。">
+  <title>星轨跑酷 · NIGHTLINE RUN</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111725'/%3E%3Cpath d='M10 5v22m12-22v22M8 10h16M8 16h16M8 22h16' stroke='%23ff8c54' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="premium.css">
+  <script defer src="vendor/three.min.js"></script>
+  <script defer src="core.js"></script>
+  <script defer src="mascots.js"></script>
+  <script defer src="themes.js"></script>
+  <script defer src="game.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <a class="brand" href="./" aria-label="星轨跑酷首页"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M10 5v22m12-22v22M8 10h16M8 16h16M8 22h16"/></svg></span><span><b>NIGHTLINE<span class="brand-run"> RUN</span></b><small>星轨跑酷</small></span></a>
+      <div class="header-right"><span class="mode-label">无尽街机</span><span class="best-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v8a4 4 0 0 1-8 0ZM8 5H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 3v5m-4 0h8"/></svg>最高纪录 <strong id="best-score">0</strong></span><button class="board-button" id="board-button" aria-label="本机排行榜"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12h4v8m2 0V4h4v16m2 0v-6h4v6M2 20h20"/></svg><span>排行榜</span></button></div>
+    </header>
+
+    <section class="game-shell" id="game-shell" aria-label="星轨跑酷游戏">
+      <div class="viewport" id="viewport"><canvas id="game-canvas" tabindex="0" aria-label="三条跑道的城市跑酷场景">请使用支持图形绘制的浏览器。</canvas></div>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="hud" id="hud">
+        <div class="hud-score"><span>本局得分</span><strong id="score">00000</strong><small><span id="distance">0</span> 米</small></div>
+        <div class="hud-right"><span class="coin-counter"><i aria-hidden="true">✦</i><strong id="coins">0</strong></span><button id="sound-button" class="icon-button" aria-label="开启音效" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4Zm6 4 4 6m0-6-4 6"/></svg></button><button id="pause-button" class="icon-button" aria-label="暂停游戏" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14m8-14v14"/></svg></button></div>
+      </div>
+      <div class="location-label"><span class="location-line"></span><span id="map-number">01</span> <span id="map-name">落日城 · 环线</span></div>
+      <div class="status-banner" id="status-banner" role="status" aria-live="polite"></div>
+      <div class="power-effects" id="power-effects" aria-label="当前道具效果"><span id="effect-magnet" hidden>🧲 磁铁 <b>9s</b></span><span id="effect-shield" hidden>◇ 护盾 <b>14s</b></span><span id="effect-double" hidden>×2 双倍积分 <b>10s</b></span></div>
+      <div class="reward-progress" id="reward-progress" hidden><span id="next-reward-label">下一奖励 · 300 分</span><div><i id="reward-fill"></i></div><small id="revive-count">可复活 2 次</small></div>
+      <div class="reward-toast" id="reward-toast" hidden role="status"><span class="reward-burst">✦</span><div><strong id="reward-title"></strong><span id="reward-description"></span></div></div>
+      <div class="start-overlay overlay" id="start-overlay">
+        <div class="start-card">
+          <div class="eyebrow"><span></span> READY TO RUN?</div>
+          <h1>星轨<span>跑酷<i>✦</i></span></h1>
+          <p>躲开列车，收集金币与道具。</p>
+          <button class="wardrobe-entry" id="wardrobe-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4a4 4 0 0 1-8 0Z"/></svg><span>角色与衣橱<small id="outfit-summary">奶龙 · 原装</small></span><b>换装</b></button>
+          <button class="primary-button" id="start-button">开始跑酷 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg></button>
+          <div class="start-hint">按 <kbd>空格</kbd> 开始 · 手机滑动操作</div>
+        </div>
+        <span class="scene-caption">落日将至，奔跑正好。</span>
+      </div>
+      <div class="center-overlay overlay" id="pause-overlay" hidden>
+        <div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="pause-title"><span class="eyebrow">TAKE A BREATHER</span><h2 id="pause-title">歇一下，继续冲。</h2><p>你的这一局还在等你。</p><div class="pause-maps choice-row" role="group" aria-label="暂停时切换地图"><button data-map="sunset" aria-pressed="true">落日</button><button data-map="neon" aria-pressed="false">霓虹</button><button data-map="snow" aria-pressed="false">雪境</button></div><button class="primary-button" id="resume-button">继续跑酷</button><button class="text-button" id="pause-restart">重新开始</button></div>
+      </div>
+      <div class="center-overlay overlay" id="end-overlay" hidden>
+        <div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="end-title"><span class="eyebrow" id="end-eyebrow">NICE RUN!</span><h2 id="end-title">这一站，跑得漂亮。</h2><p id="end-reason"></p><div class="result-score" id="result-score">0</div><span class="result-label">本局得分</span><div class="results"><span>距离 <b id="result-distance">0 米</b></span><span>金币 <b id="result-coins">0</b></span></div><button class="primary-button" id="restart-button">再跑一局 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5m5-1a8 8 0 1 0-1 7"/></svg></button><button class="text-button" id="home-button">回到起点</button></div>
+      </div>
+      <div class="center-overlay overlay" id="error-overlay" hidden><div class="dialog-card"><h2>画面暂时无法打开</h2><p id="error-message">请开启浏览器硬件加速，或使用最新版 Chrome / Edge。</p><button class="primary-button" onclick="location.reload()">重新加载</button></div></div>
+      <div class="center-overlay overlay" id="revive-overlay" hidden><div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="revive-title"><span class="eyebrow">ONE MORE CHANCE</span><h2 id="revive-title">摔了一跤，还能继续。</h2><p id="revive-reason"></p><div class="revive-score"><b id="crash-score">0</b><span>分 · 这一路值得继续</span></div><p class="revive-help">复活后保留得分和金币，并获得 3 秒无敌。</p><button class="primary-button" id="revive-button">免费复活 · 剩余 2 次</button><button class="text-button" id="finish-button">结束本局，查看成绩</button></div></div>
+      <div class="wardrobe-overlay overlay" id="wardrobe-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="wardrobe-title"><div class="wardrobe-pane"><div class="wardrobe-heading"><div><span class="eyebrow">DRESS YOUR RUNNER</span><h2 id="wardrobe-title">角色衣橱</h2></div><button class="icon-button" id="close-wardrobe" aria-label="关闭角色衣橱"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18"/></svg></button></div><div class="wardrobe-scroll"><div class="wardrobe"><div class="selection-label">选择跑者 <span id="character-description">奶龙 · 软萌小恐龙</span></div><div class="choice-row character-cards" role="group" aria-label="选择角色"><button data-character="alo" aria-pressed="true"><span class="character-symbol">🦖</span><strong>奶龙</strong><small>软萌小恐龙</small></button><button data-character="mia" aria-pressed="false"><span class="character-symbol">🐈</span><strong>胖猫</strong><small>蓝色圆胖猫</small></button><button data-character="bei" aria-pressed="false"><span class="character-symbol">🐷</span><strong>猪猪侠</strong><small>红衣小英雄</small></button></div><div class="selection-label gear-label">选择配饰</div><div class="choice-row gear-row" role="group" aria-label="选择角色配饰"><button data-gear="none" aria-pressed="true">原装</button><button data-gear="star" aria-pressed="false">✦ 星徽</button><button data-gear="cat" aria-pressed="false">猫耳</button><button data-gear="phones" aria-pressed="false">耳机</button><button data-gear="crown" aria-pressed="false" disabled title="单局达到 1500 分解锁星冠">星冠 <span id="crown-lock">🔒</span></button></div></div><div class="diy-studio"><div class="studio-heading"><h3>DIY 穿搭</h3><button id="reset-outfit" class="text-button">恢复默认</button></div><div class="diy-content"><div class="color-row"><label><input type="color" id="shirt-color" aria-label="上衣颜色" value="#ffd246"><span>上衣</span></label><label><input type="color" id="pants-color" aria-label="裤子颜色" value="#ffd246"><span>裤子</span></label><label><input type="color" id="hat-color" aria-label="帽子颜色" value="#55aaa5"><span>帽子</span></label><label><input type="color" id="shoes-color" aria-label="鞋子颜色" value="#ffd246"><span>鞋子</span></label></div><div class="studio-options"><label class="hat-toggle"><input type="checkbox" id="wear-hat">戴上帽子</label><div class="choice-row pattern-row" role="group" aria-label="上衣图案"><button data-pattern="plain" aria-pressed="true">纯色</button><button data-pattern="stripe" aria-pressed="false">条纹</button><button data-pattern="colorblock" aria-pressed="false">拼色</button></div></div></div></div><p class="wardrobe-save-note">每个角色的穿搭都会自动保存。</p></div><button class="primary-button" id="wardrobe-done">穿好了，出发</button></div><div class="wardrobe-viewer" id="wardrobe-viewer" aria-label="可拖动旋转的角色预览"><canvas id="wardrobe-canvas" aria-label="穿搭实时预览"></canvas><span class="preview-chip">3D 实时试衣</span><div class="preview-name"><h3 id="preview-character-name">奶龙</h3><p id="preview-character-detail">软萌小恐龙</p></div><span class="rotate-hint">拖动角色区，转身看看</span></div></div>
+      <div class="countdown-overlay" id="countdown-overlay" hidden role="status"><strong id="countdown-number">3</strong><span>准备继续 · 复活后 3 秒无敌</span></div>
+      <div class="center-overlay overlay" id="board-overlay" hidden><div class="dialog-card board-card" role="dialog" aria-modal="true" aria-labelledby="board-title"><div class="board-heading"><div><span class="eyebrow">YOUR BEST RUNS</span><h2 id="board-title">本机排行榜</h2></div><button class="icon-button" id="close-board" aria-label="关闭排行榜"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18"/></svg></button></div><p class="board-explanation" id="board-note">记录当前浏览器中得分最高的 10 局。</p><div class="leaderboard-scroll"><table><thead><tr><th scope="col">名次</th><th scope="col">跑者</th><th scope="col">得分</th><th scope="col">距离</th></tr></thead><tbody id="leaderboard-body"></tbody></table><p class="empty-board" id="empty-board">还没有成绩。<br>跑完第一局，留下你的纪录。</p></div><button class="primary-button" id="board-done">继续</button></div></div>
+      <div class="touch-controls" id="touch-controls" aria-label="触屏操作"><button data-action="left" aria-label="向左换道"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button data-action="jump" aria-label="跳跃"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button><button data-action="slide" aria-label="下滑"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 10 6 6 6-6"/></svg></button><button data-action="right" aria-label="向右换道"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div>
+      <div class="map-selector"><span>选择地图</span><div class="choice-row" role="group" aria-label="选择地图"><button data-map="sunset" aria-pressed="true"><i style="--swatch:#f6b281"></i>落日</button><button data-map="neon" aria-pressed="false"><i style="--swatch:#c9a1f9"></i>霓虹</button><button data-map="snow" aria-pressed="false"><i style="--swatch:#acdfe9"></i>雪境</button></div></div>
+      <div class="progress-track" aria-hidden="true"><i id="pace-line"></i></div>
+    </section>
+
+    <footer class="footer"><div class="controls-legend"><span><kbd>←</kbd><kbd>→</kbd> 换道</span><span><kbd>↑</kbd><kbd>空格</kbd> 跳跃</span><span><kbd>↓</kbd> 下滑</span><span><kbd>P</kbd> 暂停</span></div><span class="footer-note">🧲 磁铁吸金币　◇ 护盾挡撞击　×2 双倍积分</span></footer>
+    <p class="mobile-hint">左右滑动换道 · 上滑跳跃 · 下滑躲避</p>
+    <noscript><p class="noscript">请启用 JavaScript 后开始游戏。</p></noscript>
+  </main>
+</body>
+</html>

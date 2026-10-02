@@ -1,0 +1,14 @@
+{
+  "name": "xinggui-run-qg",
+  "version": "1.0.0",
+  "private": true,
+  "description": "星轨跑酷：支持角色换装、地图切换、道具、奖励和复活的浏览器小游戏",
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "build": "node scripts/build.cjs",
+    "test": "node tests/gameplay.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
