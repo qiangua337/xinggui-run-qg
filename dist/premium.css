@@ -17,3 +17,6 @@ body{background:radial-gradient(ellipse at 50% -25%,#37435d70,transparent 65%),#
 @media(max-height:650px) and (min-width:651px){.start-overlay{padding:18px 34px}.start-card h1{font-size:43px;margin:8px 0 11px}.start-card p{font-size:13px;margin-bottom:10px}.difficulty-select button{min-height:49px;padding:8px 10px}.start-card .difficulty-note{margin:7px 0 11px}.wardrobe-entry{padding:9px 12px;margin-bottom:13px}.start-hint{margin-top:11px}}
 @media(min-width:651px){.start-card{padding-bottom:0}.start-card h1{margin-bottom:12px}.start-hint{margin-top:12px}}
 @media(max-width:650px){.run-mode-badge{top:123px}.power-effects{top:163px}}
+
+/* Keep the rotation hint beside the model's display stand on small screens. */
+@media(max-width:650px){.rotate-hint{left:18px;right:auto;bottom:19px;max-width:80px;text-align:left;line-height:1.6}}
