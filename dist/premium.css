@@ -20,3 +20,4 @@ body{background:radial-gradient(ellipse at 50% -25%,#37435d70,transparent 65%),#
 
 /* Keep the rotation hint beside the model's display stand on small screens. */
 @media(max-width:650px){.rotate-hint{left:18px;right:auto;bottom:19px;max-width:80px;text-align:left;line-height:1.6}}
+.wardrobe-viewer{user-select:none;-webkit-user-select:none}

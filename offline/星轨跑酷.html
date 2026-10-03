@@ -48,6 +48,7 @@ body{background:radial-gradient(ellipse at 50% -25%,#37435d70,transparent 65%),#
 
 /* Keep the rotation hint beside the model's display stand on small screens. */
 @media(max-width:650px){.rotate-hint{left:18px;right:auto;bottom:19px;max-width:80px;text-align:left;line-height:1.6}}
+.wardrobe-viewer{user-select:none;-webkit-user-select:none}
 
 </style>
 </head>
@@ -95,7 +96,7 @@ body{background:radial-gradient(ellipse at 50% -25%,#37435d70,transparent 65%),#
       </div>
       <div class="center-overlay overlay" id="error-overlay" hidden><div class="dialog-card"><h2>画面暂时无法打开</h2><p id="error-message">请开启浏览器硬件加速，或使用最新版 Chrome / Edge。</p><button class="primary-button" onclick="location.reload()">重新加载</button></div></div>
       <div class="center-overlay overlay" id="revive-overlay" hidden><div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="revive-title"><span class="eyebrow">ONE MORE CHANCE</span><h2 id="revive-title">摔了一跤，还能继续。</h2><p id="revive-reason"></p><div class="revive-score"><b id="crash-score">0</b><span>分 · 这一路值得继续</span></div><p class="revive-help">复活后保留得分和金币，并获得 3 秒无敌。</p><button class="primary-button" id="revive-button">免费复活 · 剩余 2 次</button><button class="text-button" id="finish-button">结束本局，查看成绩</button></div></div>
-      <div class="wardrobe-overlay overlay" id="wardrobe-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="wardrobe-title"><div class="wardrobe-pane"><div class="wardrobe-heading"><div><span class="eyebrow">DRESS YOUR RUNNER</span><h2 id="wardrobe-title">角色衣橱</h2></div><button class="icon-button" id="close-wardrobe" aria-label="关闭角色衣橱"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18"/></svg></button></div><div class="wardrobe-scroll"><div class="wardrobe"><div class="selection-label">选择跑者 <span id="character-description">奶龙 · 软萌小恐龙</span></div><div class="choice-row character-cards" role="group" aria-label="选择角色"><button data-character="alo" aria-pressed="true"><span class="character-symbol">🦖</span><strong>奶龙</strong><small>软萌小恐龙</small></button><button data-character="mia" aria-pressed="false"><span class="character-symbol">🐈</span><strong>胖猫</strong><small>蓝色圆胖猫</small></button><button data-character="bei" aria-pressed="false"><span class="character-symbol">🐷</span><strong>猪猪侠</strong><small>红衣小英雄</small></button></div><div class="selection-label gear-label">选择配饰</div><div class="choice-row gear-row" role="group" aria-label="选择角色配饰"><button data-gear="none" aria-pressed="true">原装</button><button data-gear="star" aria-pressed="false">✦ 星徽</button><button data-gear="cat" aria-pressed="false">猫耳</button><button data-gear="phones" aria-pressed="false">耳机</button><button data-gear="crown" aria-pressed="false" disabled title="单局达到 1500 分解锁星冠">星冠 <span id="crown-lock">🔒</span></button></div></div><div class="diy-studio"><div class="studio-heading"><h3>DIY 穿搭</h3><button id="reset-outfit" class="text-button">恢复默认</button></div><div class="diy-content"><div class="color-row"><label><input type="color" id="shirt-color" aria-label="上衣颜色" value="#ffd246"><span>上衣</span></label><label><input type="color" id="pants-color" aria-label="裤子颜色" value="#ffd246"><span>裤子</span></label><label><input type="color" id="hat-color" aria-label="帽子颜色" value="#55aaa5"><span>帽子</span></label><label><input type="color" id="shoes-color" aria-label="鞋子颜色" value="#ffd246"><span>鞋子</span></label></div><div class="studio-options"><label class="hat-toggle"><input type="checkbox" id="wear-hat">戴上帽子</label><div class="choice-row pattern-row" role="group" aria-label="上衣图案"><button data-pattern="plain" aria-pressed="true">纯色</button><button data-pattern="stripe" aria-pressed="false">条纹</button><button data-pattern="colorblock" aria-pressed="false">拼色</button></div></div></div></div><p class="wardrobe-save-note">每个角色的穿搭都会自动保存。</p></div><button class="primary-button" id="wardrobe-done">穿好了，出发</button></div><div class="wardrobe-viewer" id="wardrobe-viewer" aria-label="可拖动旋转的角色预览"><canvas id="wardrobe-canvas" aria-label="穿搭实时预览"></canvas><span class="preview-chip">3D 实时试衣</span><div class="preview-name"><h3 id="preview-character-name">奶龙</h3><p id="preview-character-detail">软萌小恐龙</p></div><span class="rotate-hint">拖动角色区，转身看看</span></div></div>
+      <div class="wardrobe-overlay overlay" id="wardrobe-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="wardrobe-title"><div class="wardrobe-pane"><div class="wardrobe-heading"><div><span class="eyebrow">DRESS YOUR RUNNER</span><h2 id="wardrobe-title">角色衣橱</h2></div><button class="icon-button" id="close-wardrobe" aria-label="关闭角色衣橱"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18"/></svg></button></div><div class="wardrobe-scroll"><div class="wardrobe"><div class="selection-label">选择跑者 <span id="character-description">奶龙 · 圆头大肚子</span></div><div class="choice-row character-cards" role="group" aria-label="选择角色"><button data-character="alo" aria-pressed="true"><span class="character-symbol">🦖</span><strong>奶龙</strong><small>圆头大肚子</small></button><button data-character="mia" aria-pressed="false"><span class="character-symbol">🐈</span><strong>胖猫</strong><small>蓝紫表情包</small></button><button data-character="bei" aria-pressed="false"><span class="character-symbol">🐷</span><strong>猪猪侠</strong><small>红衣小英雄</small></button></div><div class="selection-label gear-label">选择配饰</div><div class="choice-row gear-row" role="group" aria-label="选择角色配饰"><button data-gear="none" aria-pressed="true">原装</button><button data-gear="star" aria-pressed="false">✦ 星徽</button><button data-gear="cat" aria-pressed="false">猫耳</button><button data-gear="phones" aria-pressed="false">耳机</button><button data-gear="crown" aria-pressed="false" disabled title="单局达到 1500 分解锁星冠">星冠 <span id="crown-lock">🔒</span></button></div></div><div class="diy-studio"><div class="studio-heading"><h3>DIY 穿搭</h3><button id="reset-outfit" class="text-button">恢复默认</button></div><div class="diy-content"><div class="color-row"><label><input type="color" id="shirt-color" aria-label="上衣颜色" value="#ffd246"><span>上衣</span></label><label><input type="color" id="pants-color" aria-label="裤子颜色" value="#ffd246"><span>裤子</span></label><label><input type="color" id="hat-color" aria-label="帽子颜色" value="#55aaa5"><span>帽子</span></label><label><input type="color" id="shoes-color" aria-label="鞋子颜色" value="#ffd246"><span>鞋子</span></label></div><div class="studio-options"><label class="hat-toggle"><input type="checkbox" id="wear-hat">戴上帽子</label><div class="choice-row pattern-row" role="group" aria-label="上衣图案"><button data-pattern="plain" aria-pressed="true">纯色</button><button data-pattern="stripe" aria-pressed="false">条纹</button><button data-pattern="colorblock" aria-pressed="false">拼色</button></div></div></div></div><p class="wardrobe-save-note">每个角色的穿搭都会自动保存。</p></div><button class="primary-button" id="wardrobe-done">穿好了，出发</button></div><div class="wardrobe-viewer" id="wardrobe-viewer" aria-label="可拖动旋转的角色预览"><canvas id="wardrobe-canvas" aria-label="穿搭实时预览"></canvas><span class="preview-chip">3D 实时试衣</span><div class="preview-name"><h3 id="preview-character-name">奶龙</h3><p id="preview-character-detail">圆头大肚子</p></div><span class="rotate-hint">拖动角色区，转身看看</span></div></div>
       <div class="countdown-overlay" id="countdown-overlay" hidden role="status"><strong id="countdown-number">3</strong><span>准备继续 · 复活后 3 秒无敌</span></div>
       <div class="center-overlay overlay" id="board-overlay" hidden><div class="dialog-card board-card" role="dialog" aria-modal="true" aria-labelledby="board-title"><div class="board-heading"><div><span class="eyebrow">YOUR BEST RUNS</span><h2 id="board-title">本机排行榜</h2></div><button class="icon-button" id="close-board" aria-label="关闭排行榜"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12m0-12L6 18"/></svg></button></div><div class="board-modes choice-row" role="group" aria-label="排行榜模式"><button data-board-mode="classic" aria-pressed="true">经典榜</button><button data-board-mode="rush" aria-pressed="false">极速榜</button></div><p class="board-explanation" id="board-note">记录当前浏览器中得分最高的 10 局。</p><div class="leaderboard-scroll"><table><thead><tr><th scope="col">名次</th><th scope="col">跑者</th><th scope="col">得分</th><th scope="col">距离</th></tr></thead><tbody id="leaderboard-body"></tbody></table><p class="empty-board" id="empty-board">还没有成绩。<br>跑完第一局，留下你的纪录。</p></div><button class="primary-button" id="board-done">继续</button></div></div>
       <div class="touch-controls" id="touch-controls" aria-label="触屏操作"><button data-action="left" aria-label="向左换道"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button data-action="jump" aria-label="跳跃"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button><button data-action="slide" aria-label="下滑"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 10 6 6 6-6"/></svg></button><button data-action="right" aria-label="向右换道"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div>
@@ -184,19 +185,21 @@ root.RunRecords=RunRecords;if(typeof module!=='undefined')module.exports={RunRec
 
 </script>
 <script>
-/* Rounded, individually sculpted mascots. Clothing keeps the existing DIY materials. */
+/* Character silhouettes and facial features follow the references chosen by the player. */
 window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoesMat, capMat, runner}) {
   const surface = (color, roughness = .48, coat = .12, metalness = 0) =>
     new THREE.MeshPhysicalMaterial({color, roughness, metalness, clearcoat: coat, clearcoatRoughness: .32});
-  const yellow = surface(0xffcd38, .43, .22);
+  const yellow = surface(0xffd23b, .5, .13);
   const cream = surface(0xffe9ab, .63);
-  const blue = surface(0x5dace1, .57);
-  const blueStripe = surface(0x3984b7, .58);
+  const blue = surface(0x514798, .58);
+  const blueStripe = surface(0x333273, .57);
+  const catPink = surface(0xd7b1d6, .61);
   const white = surface(0xfffaf1, .46, .15);
   const pink = surface(0xf8bdab, .5, .13);
   const blush = surface(0xf5a29d, .64);
   const dark = surface(0x493d48, .52);
   const gold = surface(0xffce64, .3, .32, .3);
+  const heroYellow = surface(0xffd154, .52, .15);
   const teal = surface(0x84e3d4, .3, .36, .15);
   const sole = surface(0xfff3dc, .66);
   const models = {};
@@ -245,6 +248,54 @@ window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoe
     const object = mesh(parent, geometry, mat, 0, y, .015);
     object.scale.set(width, height, depth); return object;
   }
+  function frontOf(y, width, height, depth, pearShape = false, z = 0) {
+    return (x, yy) => {
+      const unitY = (yy - y) / height, weight = pearShape ? 1 - unitY * .16 : 1;
+      return z - depth * Math.sqrt(Math.max(.003, (1 - unitY * unitY) * weight * weight - x * x / (width * width)));
+    };
+  }
+  // Subdivide and conform a painted detail to the rounded skin, avoiding floating belly plates.
+  function painted(parent, shape, mat, front, offset = .009) {
+    const flat = new THREE.ShapeGeometry(shape, 20), source = flat.attributes.position;
+    const indices = flat.index.array, positions = [], normals = [], uv = [], steps = 6;
+    flat.computeBoundingBox(); const bounds = flat.boundingBox;
+    const add = (x, y) => {
+      positions.push(x, y, front(x, y) - offset);
+      const normal = new THREE.Vector3((front(x + .001, y) - front(x - .001, y)) / .002,
+        (front(x, y + .001) - front(x, y - .001)) / .002, -1).normalize();
+      normals.push(normal.x, normal.y, normal.z);
+      uv.push((x - bounds.min.x) / (bounds.max.x - bounds.min.x), (y - bounds.min.y) / (bounds.max.y - bounds.min.y));
+    };
+    for (let triangle = 0; triangle < indices.length; triangle += 3) {
+      const points = [0, 1, 2].map(k => [source.getX(indices[triangle + k]), source.getY(indices[triangle + k])]);
+      const point = (i, j) => [points[0][0] + (points[1][0] - points[0][0]) * i / steps + (points[2][0] - points[0][0]) * j / steps,
+        points[0][1] + (points[1][1] - points[0][1]) * i / steps + (points[2][1] - points[0][1]) * j / steps];
+      for (let i = 0; i < steps; i++) for (let j = 0; j < steps - i; j++) {
+        add(...point(i, j)); add(...point(i + 1, j)); add(...point(i, j + 1));
+        if (i + j < steps - 1) {add(...point(i + 1, j)); add(...point(i + 1, j + 1)); add(...point(i, j + 1));}
+      }
+    }
+    flat.dispose();
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+    geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    // These decals have explicit outward normals, and may be mirrored to either cheek.
+    mat.side = THREE.DoubleSide;
+    const object = mesh(parent, geometry, mat); object.castShadow = false; object.receiveShadow = false;
+    return object;
+  }
+  function softBelly(parent, y, width, height, color, front) {
+    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
+    const ctx = canvas.getContext('2d'), gradient = ctx.createRadialGradient(64, 64, 20, 64, 64, 64);
+    gradient.addColorStop(0, color); gradient.addColorStop(.73, color);
+    gradient.addColorStop(1, color.replace('1)', '0)'));
+    ctx.fillStyle = gradient; ctx.fillRect(0, 0, 128, 128);
+    const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
+    const mat = new THREE.MeshStandardMaterial({map: texture, transparent: true, depthWrite: false, roughness: .7});
+    const shape = new THREE.Shape(); shape.absellipse(0, y, width, height, 0, Math.PI * 2, false);
+    return painted(parent, shape, mat, front);
+  }
   function ear(parent, x, y, z, width, height, outer, inner, angle = 0) {
     const assembly = group(); assembly.position.set(x, y, z); assembly.rotation.z = angle;
     const shape = new THREE.Shape();
@@ -260,16 +311,17 @@ window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoe
     parent.add(assembly); return assembly;
   }
   function eyes(parent, y, z, spacing, size, irisColor, kind) {
-    const irisMat = surface(irisColor, .26, .48), pupilMat = surface(0x202932, .22, .48);
+    const irisMat = surface(irisColor, .32, .3), pupilMat = surface(0x111621, .28, .3);
+    const dragon = kind === 'dragon';
     for (const side of [-1, 1]) {
       const eye = group(); eye.position.set(side * spacing, y, z);
       eye.rotation.y = -side * .2; eye.userData.pose = 'eye'; eye.userData.side = side;
-      orb(eye, 0, 0, .014, size * 1.07, size * 1.19, .075, kind === 'cat' ? blueStripe : cream, true);
-      orb(eye, 0, 0, 0, size, size * 1.13, .086, white, true);
-      orb(eye, -side * .009, -.008, -.075, size * .66, size * .77, .027, irisMat, true);
-      orb(eye, -side * .012, -.008, -.096, size * .38, size * .56, .018, pupilMat, true);
-      orb(eye, -size * .22, size * .32, -.112, size * .17, size * .2, .01, white, true);
-      orb(eye, size * .22, -size * .24, -.112, size * .075, size * .09, .007, white, true);
+      orb(eye, 0, 0, .007, size * 1.065, size * 1.15, .034, dragon ? yellow : pink, true);
+      orb(eye, 0, 0, 0, size, size * 1.1, .046, white, true);
+      orb(eye, 0, -.004, -.038, size * (dragon ? .86 : .76), size * (dragon ? .94 : .86), .019, irisMat, true);
+      orb(eye, 0, -.004, -.052, size * (dragon ? .69 : .52), size * (dragon ? .8 : .68), .016, pupilMat, true);
+      orb(eye, -size * .22, size * .32, -.068, size * .16, size * .19, .006, white, true);
+      orb(eye, size * .22, -size * .24, -.068, size * .065, size * .085, .005, white, true);
       parent.add(eye);
     }
   }
@@ -283,13 +335,23 @@ window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoe
       const arm = group(); arm.position.set(side * shoulder, armY, 0);
       arm.rotation.z = side * .13; arm.userData = {pose: 'arm', side, restZ: side * .13};
       orb(arm, 0, -.08, 0, width * 1.04, .19, width * 1.05, shirtMat);
-      capsule(arm, 0, -.22, -.008, width * .87, .12, skin);
+      capsule(arm, 0, -.22, -.008, width * .87, .12, kind === 'cat' ? blue : skin);
       orb(arm, 0, -.335, -.025, width * 1.05, .14, width * 1.08, skin);
       orb(arm, -side * .075, -.31, -.055, .055, .073, .065, skin);
       if (pig) {
         const cuff = mesh(arm, new THREE.TorusGeometry(.108, .027, 8, 24), gold, 0, -.245, 0);
         cuff.rotation.x = Math.PI / 2;
         orb(arm, 0, -.34, -.134, .045, .031, .012, sole, true);
+      } else if (kind === 'dragon') {
+        orb(arm, 0, -.35, -.164, .065, .072, .014, blush, true);
+        for (let finger = -1; finger <= 1; finger++)
+          orb(arm, finger * .062, -.43, -.084, .024, .045, .026, dark);
+      } else if (kind === 'cat') {
+        for (let finger = -1; finger <= 1; finger++) {
+          const digit = capsule(arm, finger * .06, -.432, -.056, .032, .09, catPink);
+          digit.rotation.z = -finger * .18;
+          orb(arm, finger * .069, -.49, -.076, .012, .025, .013, blueStripe);
+        }
       } else {
         for (let finger = -1; finger <= 1; finger++)
           stroke(arm, [[finger * .045, -.355, -.16], [finger * .045, -.388, -.139]], .006, kind === 'cat' ? blueStripe : cream, 6);
@@ -298,29 +360,59 @@ window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoe
       const leg = group(); leg.position.set(side * hip, legY, .005); leg.userData.pose = 'leg';
       capsule(leg, 0, -.115, 0, pig ? .132 : .16, .095, pantsMat);
       orb(leg, 0, -.25, -.07, pig ? .168 : .21, .145, .26, shoesMat);
-      orb(leg, 0, -.352, -.07, pig ? .173 : .214, .036, .268, sole);
-      orb(leg, 0, -.23, -.291, pig ? .08 : .12, .024, .023, sole, true);
+      if (pig) {
+        orb(leg, 0, -.352, -.07, .173, .036, .268, surface(0xcc384c));
+        orb(leg, 0, -.23, -.291, .08, .024, .023, heroYellow, true);
+      }
       if (pig) orb(leg, 0, -.16, -.085, .153, .075, .192, shoesMat);
       else for (let toe = -1; toe <= 1; toe++)
-        orb(leg, toe * .065, -.256, -.318, .022, .012, .009, kind === 'cat' ? white : cream, true);
+        orb(leg, toe * .07, -.262, -.302, kind === 'dragon' ? .028 : .023, kind === 'dragon' ? .035 : .014,
+          kind === 'dragon' ? .048 : .015, kind === 'cat' ? blueStripe : dark, true);
       parent.add(leg); result.push({arm, leg, side});
     }
     return result;
   }
   function accessories(parent, headY, width, depth, kind) {
     const cap = group();
-    const dome = mesh(cap, new THREE.SphereGeometry(1, 32, 20, 0, Math.PI * 2, 0, Math.PI / 2), capMat, 0, headY + .31, .035);
-    dome.scale.set(width * 1.065, kind === 'pig' ? .34 : .27, depth * 1.07);
     if (kind === 'pig') {
-      stroke(cap, [[-.49, headY + .31, -.2], [-.28, headY + .325, -.4],
-        [0, headY + .34, -.454], [.28, headY + .325, -.4], [.49, headY + .31, -.2]], .018, gold);
-      orb(cap, 0, headY + .48, -.395, .112, .117, .033, gold);
-      orb(cap, 0, headY + .48, -.429, .055, .061, .012, capMat, true);
-      for (const side of [-1, 1]) orb(cap, side * .023, headY + .48, -.443, .009, .016, .006, gold, true);
+      const shell = new THREE.BufferGeometry(), shellPositions = [], shellNormals = [], shellUV = [], shellIndices = [];
+      const segments = 64, rings = 32;
+      for (let row = 0; row <= rings; row++) for (let column = 0; column <= segments; column++) {
+        const angle = column / segments * Math.PI * 2, co = Math.cos(angle), si = Math.sin(angle);
+        const a = (co / .84) ** 2 + (si / .8) ** 2, bb = 2 * si * .08 / (.8 * .8), c = (.08 / .8) ** 2 - 1;
+        const radius = (-bb + Math.sqrt(bb * bb - 4 * a * c)) / (2 * a), start = Math.asin(radius);
+        const theta = start + (Math.PI - start) * row / rings;
+        const x = Math.sin(theta) * co, y = Math.sin(theta) * si, z = -Math.cos(theta);
+        shellPositions.push(x, y, z); shellNormals.push(x, y, z); shellUV.push(column / segments, row / rings);
+        if (row < rings && column < segments) {
+          const i = row * (segments + 1) + column;
+          shellIndices.push(i, i + 1, i + segments + 1, i + 1, i + segments + 2, i + segments + 1);
+        }
+      }
+      shell.setAttribute('position', new THREE.Float32BufferAttribute(shellPositions, 3));
+      shell.setAttribute('normal', new THREE.Float32BufferAttribute(shellNormals, 3));
+      shell.setAttribute('uv', new THREE.Float32BufferAttribute(shellUV, 2)); shell.setIndex(shellIndices);
+      const hood = mesh(cap, shell, capMat, 0, headY + .035, 0); hood.scale.set(.645, .63, .48);
+      const rim = [];
+      for (let i = 0; i <= 64; i++) {
+        const angle = i / 64 * Math.PI * 2, x = .84 * Math.cos(angle), y = -.08 + .8 * Math.sin(angle);
+        rim.push([x * .645, headY + .035 + y * .63, -.48 * Math.sqrt(Math.max(.003, 1 - x * x - y * y)) - .012]);
+      }
+      stroke(cap, rim, .026, capMat, 64);
+      for (const side of [-1, 1]) {
+        const lobe = orb(cap, side * .256, headY + .56, -.135, .178, .146, .16, capMat);
+        lobe.rotation.z = -side * .22;
+        const inset = orb(cap, side * .256, headY + .573, -.301, .107, .077, .018, heroYellow, true);
+        inset.rotation.z = -side * .22;
+        tapered(cap, [[side * .555, headY + .18, -.16], [side * .57, headY + .09, -.245],
+          [side * .51, headY + .035, -.286]], .049, .01, white);
+      }
     } else {
-      orb(cap, 0, headY + .31, -depth * .66, width * .83, .031, .31, capMat);
-      stroke(cap, [[0, headY + .57, .015], [0, headY + .52, -.23], [0, headY + .33, -depth]], .01, sole);
-      orb(cap, 0, headY + .59, .025, .045, .025, .045, capMat);
+      const dome = mesh(cap, new THREE.SphereGeometry(1, 32, 20, 0, Math.PI * 2, 0, Math.PI / 2), capMat, 0, headY + .38, .035);
+      dome.scale.set(width * 1.065, .27, depth * 1.07);
+      orb(cap, 0, headY + .38, -depth * .66, width * .83, .031, .31, capMat);
+      stroke(cap, [[0, headY + .64, .015], [0, headY + .59, -.23], [0, headY + .4, -depth]], .01, sole);
+      orb(cap, 0, headY + .66, .025, .045, .025, .045, capMat);
     }
     parent.add(cap);
     const star = group(), shape = new THREE.Shape();
@@ -362,121 +454,135 @@ window.buildMascots = function ({round, capsule, group, shirtMat, pantsMat, shoe
     parent.add(crown); return {cap, star, cat, phones, crown};
   }
 
-  // Soft pear silhouette, large expressive eyes, broad muzzle and a continuous tail.
+  // Tall, soft egg head, small green-ringed eyes, tiny mouth and an oversized cream belly.
   {
     const b = group(); runner.add(b); b.userData.kind = 'dragon';
-    pear(b, .88, .57, .65, .45, shirtMat);
-    orb(b, 0, 1.29, .015, .4, .25, .34, yellow);
-    orb(b, 0, .79, -.401, .4, .43, .072, cream);
-    orb(b, 0, 1.77, 0, .66, .555, .485, yellow);
-    orb(b, 0, 1.535, -.423, .51, .241, .26, yellow);
-    orb(b, 0, 1.385, -.483, .31, .07, .105, cream);
-    eyes(b, 1.86, -.442, .25, .162, 0x82ba4d, 'dragon');
-    for (const side of [-1, 1]) {
-      orb(b, side * .18, 1.585, -.676, .03, .021, .009, surface(0xc58c31), true);
-      orb(b, side * .421, 1.59, -.558, .078, .034, .012, surface(0xffb578), true);
-      stroke(b, [[side * .35, 2.075, -.351], [side * .25, 2.096, -.403], [side * .15, 2.08, -.414]], .02, surface(0xd9a43b));
-      const horn = group();
-      tapered(horn, [[side * .36, 2.235, .06], [side * .375, 2.33, .045], [side * .4, 2.38, .07]], .067, .025, gold);
-      b.add(horn);
+    const profile = new THREE.CatmullRomCurve3([[0, .21], [.29, .26], [.45, .45], [.56, .76], [.55, 1.07],
+      [.44, 1.33], [.405, 1.47], [.48, 1.61], [.575, 1.9], [.6, 2.1], [.51, 2.35], [.32, 2.53], [0, 2.59]]
+      .map(([x, y]) => new THREE.Vector3(x, y, 0))).getPoints(84).map(p => new THREE.Vector2(Math.max(0, p.x), p.y));
+    const skinGeometry = new THREE.LatheGeometry(profile, 48); skinGeometry.scale(1, 1, .82);
+    const vertices = skinGeometry.attributes.position, indices = skinGeometry.index.array, torso = [], head = [];
+    for (let i = 0; i < indices.length; i += 3) {
+      const target = (vertices.getY(indices[i]) + vertices.getY(indices[i + 1]) + vertices.getY(indices[i + 2])) / 3 < 1.49 ? torso : head;
+      target.push(indices[i], indices[i + 1], indices[i + 2]);
     }
-    smile(b, 0, 1.449, -.666, .145, surface(0x9d6c32));
-    orb(b, 0, 1.417, -.661, .055, .016, .012, surface(0xe7a276), true);
+    skinGeometry.clearGroups(); skinGeometry.setIndex([...torso, ...head]);
+    skinGeometry.addGroup(0, torso.length, 0); skinGeometry.addGroup(torso.length, head.length, 1);
+    mesh(b, skinGeometry, [shirtMat, yellow]);
+    const front = (x, y) => {
+      let i = profile.findIndex(p => p.y >= y); i = Math.max(1, i < 0 ? profile.length - 1 : i);
+      const a = profile[i - 1], bb = profile[i], radius = a.x + (bb.x - a.x) * (y - a.y) / (bb.y - a.y);
+      return -.82 * Math.sqrt(Math.max(.003, radius * radius - x * x));
+    };
+    softBelly(b, .86, .425, .54, 'rgba(255,237,192,1)', front);
+    eyes(b, 2.025, -.449, .249, .126, 0x91b84e, 'dragon');
+    const mouth = group(); mouth.position.set(0, 1.74, -.481); mouth.userData.pose = 'mouth';
+    orb(mouth, 0, 0, 0, .043, .035, .009, surface(0x694637), true);
+    orb(mouth, 0, -.012, -.008, .019, .007, .003, surface(0xcd856b), true); b.add(mouth);
     const tail = group(); tail.userData.pose = 'tail';
-    tapered(tail, [[0, .65, .35], [.1, .5, .7], [.25, .4, 1.08], [.4, .45, 1.3]], .22, .057, yellow);
+    tapered(tail, [[0, .68, .33], [.08, .47, .62], [.21, .31, .94], [.33, .36, 1.15]], .218, .046, yellow);
     b.add(tail);
-    for (let i = 0; i < 4; i++) {
-      const spike = orb(b, 0, 1.4 - i * .21, .4 + i * .075, .063, .11, .1, gold);
-      spike.rotation.x = -.5;
-    }
-    models.alo = {body: b, limbs: limbs(b, yellow, .53, .27, 1.21, .39, 'dragon'),
-      accessories: accessories(b, 1.77, .61, .46, 'dragon'), tail, kind: 'dragon'};
+    models.alo = {body: b, limbs: limbs(b, yellow, .51, .265, 1.29, .38, 'dragon'),
+      accessories: accessories(b, 1.95, .56, .45, 'dragon'), tail, kind: 'dragon'};
   }
-  // Rounded ears, plush blue cheeks, bright eyes, white paws and a curling tail.
+  // The blue-purple meme cat selected by the player: pink face, lashes, red lips and feathered ears.
   {
     const b = group(); runner.add(b); b.userData.kind = 'cat';
-    pear(b, .84, .62, .59, .49, shirtMat);
-    orb(b, 0, 1.26, .005, .4, .22, .33, blue);
-    orb(b, 0, .73, -.439, .425, .36, .077, white);
-    orb(b, 0, 1.73, 0, .735, .565, .5, blue);
+    pear(b, .87, .63, .63, .495, shirtMat);
+    orb(b, 0, 1.3, .005, .4, .25, .32, blue);
+    orb(b, 0, 1.81, 0, .685, .59, .465, blue);
+    softBelly(b, .86, .432, .51, 'rgba(222,169,213,1)', frontOf(.87, .63, .63, .495, true, .015));
+    const faceFront = frontOf(1.81, .685, .59, .465);
+    const face = new THREE.Shape();
+    face.moveTo(0, 1.98); face.bezierCurveTo(-.13, 2.27, -.38, 2.24, -.49, 2.02);
+    face.bezierCurveTo(-.57, 1.83, -.52, 1.53, -.33, 1.4);
+    face.quadraticCurveTo(0, 1.25, .33, 1.4); face.bezierCurveTo(.52, 1.53, .57, 1.83, .49, 2.02);
+    face.bezierCurveTo(.38, 2.24, .13, 2.27, 0, 1.98); painted(b, face, catPink, faceFront);
+    const ink = surface(0x1c152d, .7), iris = surface(0x6b667c, .35, .28), lip = surface(0xb82e60, .46, .18);
     for (const side of [-1, 1]) {
-      ear(b, side * .44, 2.115, .015, .178, .37, blue, blush, -side * .16);
-      orb(b, side * .57, 1.59, -.156, .16, .22, .21, blue);
-      orb(b, side * .16, 1.542, -.494, .232, .162, .101, white);
-      orb(b, side * .435, 1.58, -.432, .065, .028, .009, blush, true);
-      for (let n = -1; n <= 1; n++)
-        stroke(b, [[side * .33, 1.552 + n * .044, -.559], [side * .5, 1.556 + n * .061, -.512],
-          [side * .68, 1.57 + n * .081, -.389]], .007, surface(0x456a89), 12);
+      ear(b, side * .56, 2.115, .015, .165, .39, blue, catPink, -side * .38);
+      ear(b, side * .655, 2.115, .04, .105, .30, blue, catPink, -side * .86);
+      ear(b, side * .68, 2.06, .06, .09, .255, blue, catPink, -side * 1.19);
+      const cheek = new THREE.Shape(); cheek.absellipse(side * .49, 1.645, .097, .049, 0, Math.PI * 2, false, -side * .27);
+      painted(b, cheek, blueStripe, faceFront, .015);
+      const cheekUpper = new THREE.Shape(); cheekUpper.absellipse(side * .505, 1.755, .076, .037, 0, Math.PI * 2, false, side * .16);
+      painted(b, cheekUpper, blueStripe, faceFront, .015);
+      const cx = side * .267, cy = 1.984, cz = faceFront(cx, cy) - .024;
+      const eye = group(); eye.position.set(cx, cy, cz); eye.userData.pose = 'eye';
+      const shape = new THREE.Shape();
+      shape.moveTo(cx - side * .164, cy - .026);
+      shape.quadraticCurveTo(cx - side * .04, cy + .127, cx + side * .172, cy + .046);
+      shape.quadraticCurveTo(cx + side * .02, cy - .103, cx - side * .164, cy - .026);
+      const sclera = painted(eye, shape, white, faceFront, .025); sclera.geometry.translate(-cx, -cy, -cz);
+      orb(eye, -side * .005, 0, -.016, .086, .094, .027, iris, true);
+      orb(eye, -side * .008, 0, -.039, .057, .071, .018, ink, true);
+      orb(eye, -.025, .035, -.057, .014, .019, .005, white, true);
+      orb(eye, .023, -.029, -.057, .007, .009, .004, white, true);
+      const lidPoints = [[cx - side * .164, cy - .026], [cx - side * .07, cy + .06],
+        [cx + side * .045, cy + .092], [cx + side * .172, cy + .046]];
+      stroke(eye, lidPoints.map(([x, y]) => [x - cx, y - cy, faceFront(x, y) - .034 - cz]), .013, ink);
+      for (let lash = 0; lash < 7; lash++) {
+        const x = cx + side * (-.03 + lash * .029), y = cy + .088 - Math.max(0, lash - 2) * .007;
+        const z = faceFront(x, y) - .042;
+        stroke(eye, [[x - cx, y - cy, z - cz], [x - cx + side * .022, y - cy + .045, z - cz - .015],
+          [x - cx + side * .028, y - cy + .092, z - cz + .002]], .01, ink, 8);
+      }
+      b.add(eye);
+      const browPoints = [[side * .095, 2.177], [side * .245, 2.235], [side * .42, 2.177]];
+      stroke(b, browPoints.map(([x, y]) => [x, y, faceFront(x, y) - .028]), .022, ink, 18);
     }
-    eyes(b, 1.825, -.454, .234, .141, 0x4f8cb5, 'cat');
-    const noseShape = new THREE.Shape();
-    noseShape.moveTo(-.062, .025); noseShape.quadraticCurveTo(0, .065, .062, .025);
-    noseShape.quadraticCurveTo(.033, -.023, 0, -.035); noseShape.quadraticCurveTo(-.033, -.023, -.062, .025);
-    mesh(b, new THREE.ExtrudeGeometry(noseShape, {depth: .015, bevelEnabled: true, bevelSize: .009,
-      bevelThickness: .007, bevelSegments: 3, curveSegments: 12}), blush, 0, 1.577, -.613);
-    stroke(b, [[0, 1.544, -.617], [0, 1.505, -.606], [-.08, 1.478, -.586], [-.132, 1.514, -.579]], .011, dark);
-    stroke(b, [[0, 1.505, -.606], [.08, 1.478, -.586], [.132, 1.514, -.579]], .011, dark);
-    for (let i = -1; i <= 1; i++)
-      stroke(b, [[i * .104, 2.256, -.122], [i * .112, 2.205, -.242], [i * .117, 2.117, -.339]], .023, blueStripe, 12);
+    orb(b, 0, 1.769, faceFront(0, 1.769) - .027, .046, .034, .02, ink, true);
+    const lips = new THREE.Shape();
+    lips.moveTo(-.168, 1.59); lips.quadraticCurveTo(-.082, 1.676, 0, 1.635);
+    lips.quadraticCurveTo(.082, 1.676, .168, 1.59); lips.quadraticCurveTo(.074, 1.502, 0, 1.526);
+    lips.quadraticCurveTo(-.074, 1.502, -.168, 1.59); painted(b, lips, lip, faceFront, .027);
+    stroke(b, [[-.126, 1.594], [0, 1.589], [.126, 1.594]].map(([x, y]) => [x, y, faceFront(x, y) - .038]), .011, ink);
+    stroke(b, [[-.065, 1.62], [0, 1.624], [.065, 1.62]].map(([x, y]) => [x, y, faceFront(x, y) - .036]), .008, white);
+    stroke(b, [[-.051, 1.548], [0, 1.542], [.047, 1.548]].map(([x, y]) => [x, y, faceFront(x, y) - .037]), .007, surface(0xec81ab));
+    const collar = mesh(b, new THREE.TorusGeometry(.343, .057, 12, 40), blueStripe, 0, 1.34, .005);
+    collar.rotation.x = Math.PI / 2; collar.scale.y = .8;
+    orb(b, 0, 1.288, -.348, .085, .046, .025, blueStripe);
     const tail = group(); tail.userData.pose = 'tail';
-    tapered(tail, [[0, .57, .39], [.32, .34, .77], [.63, .49, .91], [.69, .86, .84], [.57, 1.02, .68]],
-      .109, .086, blue, blueStripe);
+    tapered(tail, [[0, .6, .4], [.27, .37, .72], [.51, .6, .8], [.46, .87, .69]], .117, .078, blue, blueStripe);
     b.add(tail);
-    models.mia = {body: b, limbs: limbs(b, white, .57, .285, 1.12, .39, 'cat'),
-      accessories: accessories(b, 1.73, .68, .47, 'cat'), tail, kind: 'cat'};
+    models.mia = {body: b, limbs: limbs(b, catPink, .595, .28, 1.22, .4, 'cat'),
+      accessories: accessories(b, 1.81, .665, .45, 'cat'), tail, kind: 'cat'};
   }
-  // Warm pig face, tailored superhero suit, a sculpted hood, metallic trims and cloth cape.
+  // A full red hood with yellow padded lobes, expressive smile, round red suit and yellow boots.
   {
     const b = group(); runner.add(b); b.userData.kind = 'pig';
-    pear(b, 1.0, .41, .49, .315, shirtMat);
-    orb(b, 0, .57, .025, .32, .21, .28, pantsMat);
-    orb(b, 0, 1.34, .01, .27, .18, .24, pink);
-    orb(b, 0, 1.825, 0, .563, .54, .434, pink);
+    pear(b, .98, .468, .515, .36, shirtMat);
+    orb(b, 0, .59, .025, .34, .2, .285, pantsMat);
+    orb(b, 0, 1.36, .01, .27, .16, .23, pink);
+    orb(b, 0, 1.845, 0, .596, .535, .452, pink);
+    const faceFront = frontOf(1.845, .596, .535, .452), browMat = surface(0x382329);
     for (const side of [-1, 1]) {
-      const e = orb(b, side * .543, 1.968, .012, .122, .157, .092, pink);
-      e.rotation.z = -side * .36;
-      const inset = orb(b, side * .563, 1.98, -.062, .057, .091, .023, blush, true);
-      inset.rotation.z = -side * .36;
-      orb(b, side * .365, 1.677, -.32, .074, .033, .016, blush, true);
-      stroke(b, [[side * .327, 2.102, -.33], [side * .22, 2.129, -.393],
-        [side * .116, 2.105, -.409]], .026, surface(0x72453d));
+      orb(b, side * .365, 1.714, faceFront(side * .365, 1.714) - .012, .071, .032, .012, blush, true);
+      stroke(b, [[side * .12, 2.161], [side * .247, 2.211], [side * .356, 2.167]]
+        .map(([x, y]) => [x, y, faceFront(x, y) - .026]), .027, browMat);
     }
-    eyes(b, 1.925, -.39, .212, .135, 0x9b6a45, 'pig');
-    orb(b, 0, 1.665, -.453, .237, .158, .127, pink);
-    orb(b, 0, 1.652, -.557, .172, .09, .033, surface(0xf4b29f), true);
+    eyes(b, 1.994, -.408, .231, .137, 0x765137, 'pig');
+    orb(b, 0, 1.746, -.462, .214, .133, .093, pink);
+    orb(b, 0, 1.736, -.537, .173, .086, .024, surface(0xf4b29f), true);
     for (const side of [-1, 1])
-      orb(b, side * .081, 1.675, -.59, .025, .038, .009, surface(0xc9797c), true);
-    smile(b, 0, 1.472, -.338, .153, surface(0x89514a));
-    orb(b, 0, 1.46, -.353, .073, .022, .013, blush, true);
-    const belt = mesh(b, new THREE.TorusGeometry(.349, .04, 10, 36), gold, 0, .743, .025);
-    belt.rotation.x = Math.PI / 2; belt.scale.y = .81;
-    orb(b, 0, .745, -.283, .092, .063, .035, gold);
-    orb(b, 0, .745, -.318, .041, .028, .012, teal, true);
-    orb(b, 0, 1.06, -.314, .147, .152, .036, gold);
-    orb(b, 0, 1.06, -.35, .089, .069, .018, shirtMat, true);
+      orb(b, side * .075, 1.749, -.563, .024, .036, .008, surface(0xb56c70), true);
+    const mouth = new THREE.Shape(); mouth.moveTo(-.164, 1.581);
+    mouth.quadraticCurveTo(0, 1.6, .164, 1.581); mouth.quadraticCurveTo(.132, 1.448, 0, 1.439);
+    mouth.quadraticCurveTo(-.132, 1.448, -.164, 1.581); painted(b, mouth, surface(0x633d48), faceFront, .018);
+    const teeth = new THREE.Shape(); teeth.moveTo(-.141, 1.579); teeth.quadraticCurveTo(0, 1.593, .141, 1.579);
+    teeth.lineTo(.12, 1.542); teeth.quadraticCurveTo(0, 1.532, -.12, 1.542); teeth.closePath();
+    painted(b, teeth, white, faceFront, .023);
+    orb(b, 0, 1.47, faceFront(0, 1.47) - .025, .067, .018, .01, blush, true);
+    for (const side of [-1, 1]) orb(b, side * .113, 1.292, -.285, .047, .047, .021, heroYellow, true);
+    orb(b, 0, .974, -.352, .153, .105, .034, heroYellow);
     for (const side of [-1, 1]) {
-      orb(b, side * .035, 1.062, -.371, .013, .021, .008, gold, true);
-      stroke(b, [[side * .26, 1.28, -.214], [side * .297, 1.08, -.243],
-        [side * .25, .87, -.25]], .013, gold);
+      orb(b, side * .046, .976, -.383, .018, .033, .008, shirtMat, true);
     }
-    const cape = group(); cape.userData.pose = 'tail';
-    const capeGeometry = new THREE.PlaneGeometry(.9, .94, 12, 16), points = capeGeometry.attributes.position;
-    for (let i = 0; i < points.count; i++) {
-      const x = points.getX(i), y = points.getY(i), drop = (.47 - y) / .94;
-      points.setXYZ(i, x * (.7 + drop * .3), y + .91, .35 + drop * .2 + Math.cos(x * 19) * drop * .027);
-    }
-    capeGeometry.computeVertexNormals();
-    const capeMat = new THREE.MeshStandardMaterial({color: 0xc83c54, roughness: .79, side: THREE.DoubleSide});
-    mesh(cape, capeGeometry, capeMat);
-    stroke(cape, [[-.312, 1.38, .35], [-.38, .92, .454], [-.448, .44, .552],
-      [0, .44, .573], [.448, .44, .552], [.38, .92, .454], [.312, 1.38, .35]], .012, gold, 36);
-    mesh(cape, new THREE.TorusGeometry(.135, .014, 8, 32), gold, 0, .995, .467);
-    orb(cape, 0, .98, .478, .076, .048, .013, gold, true);
-    for (const side of [-1, 1]) orb(cape, side * .03, .982, .492, .009, .014, .006, capeMat, true);
-    b.add(cape);
-    mesh(b, new THREE.TorusGeometry(.076, .023, 8, 24, Math.PI * 1.8), pink, 0, .56, .325);
-    models.bei = {body: b, limbs: limbs(b, gold, .39, .19, 1.3, .42, 'pig'),
-      accessories: accessories(b, 1.825, .555, .434, 'pig'), tail: cape, kind: 'pig'};
+    const tail = group(); tail.userData.pose = 'tail';
+    const curl = mesh(tail, new THREE.TorusGeometry(.079, .023, 10, 28, Math.PI * 1.85), pink, 0, .61, .369);
+    curl.rotation.y = .2; b.add(tail);
+    models.bei = {body: b, limbs: limbs(b, heroYellow, .444, .213, 1.32, .42, 'pig'),
+      accessories: accessories(b, 1.845, .59, .455, 'pig'), tail, kind: 'pig'};
   }
   for (const model of Object.values(models)) {
     model.body.visible = false;
@@ -490,11 +596,12 @@ window.animateMascot = (() => {
   const parts = new WeakMap(), offsets = {dragon: .8, cat: 2.3, pig: 3.7};
   return function (root, time, idle = false, portrait = false) {
     if (!parts.has(root)) {
-      const rig = {eyes: [], arms: [], legs: [], tail: null};
+      const rig = {eyes: [], arms: [], legs: [], mouth: null, tail: null};
       root.traverse(node => {
         if (node.userData.pose === 'eye') rig.eyes.push(node);
         else if (node.userData.pose === 'arm') rig.arms.push(node);
         else if (node.userData.pose === 'leg') rig.legs.push(node);
+        else if (node.userData.pose === 'mouth') rig.mouth = node;
         else if (node.userData.pose === 'tail') rig.tail = node;
       });
       parts.set(root, rig);
@@ -502,6 +609,7 @@ window.animateMascot = (() => {
     const rig = parts.get(root), phase = (time + offsets[root.userData.kind]) % 5.3;
     const blink = phase < .18 ? Math.sin(phase / .18 * Math.PI) : 0;
     for (const eye of rig.eyes) eye.scale.y = 1 - blink * .94;
+    if (rig.mouth) rig.mouth.scale.y = idle ? 1 + Math.max(0, Math.sin(time * .8)) ** 8 * .8 : 1;
     for (const arm of rig.arms) {
       const greeting = idle && arm.userData.side === -1 ? Math.max(0, Math.sin(time * .8)) ** 8 : 0;
       arm.rotation.z = arm.userData.restZ - greeting * .36;
@@ -565,8 +673,10 @@ function refreshPortrait(){if(portrait)portraitScene.remove(portrait);portrait=m
 function renderPortrait(){if(!portraitRenderer||!wardrobeOpen||!portrait)return;const el=$('wardrobe-canvas'),w=el.clientWidth,h=el.clientHeight;if(w<=0||h<=0)return;const size=portraitRenderer.getSize(new THREE.Vector2());if(size.x!==w||size.y!==h){portraitRenderer.setSize(w,h,false);portraitCamera.aspect=w/h;portraitCamera.updateProjectionMatrix();}portrait.rotation.y=previewAngle;portrait.position.y=Math.sin(elapsed*2.6)*.018;animateMascot(portrait,elapsed,true,true);portraitRenderer.render(portraitScene,portraitCamera);}
 let selectedCharacter='alo',selectedGear='none',unlockedCrown=false,wardrobeOpen=false,previewAngle=Math.PI+.15;
 try{const p=JSON.parse(localStorage.getItem('nightline-outfit-v1')||'{}');if(['alo','mia','bei'].includes(p.character))selectedCharacter=p.character;if(['none','star','cat','phones','crown'].includes(p.gear))selectedGear=p.gear;unlockedCrown=localStorage.getItem('nightline-crown-v1')==='yes'||Number(localStorage.getItem('nightline-best-v1'))>=1500;}catch{}if(selectedGear==='crown'&&!unlockedCrown)selectedGear='none';
-const characterInfo={alo:{name:'奶龙',description:'奶龙 · 软萌小恐龙',detail:'大肚子、小爪爪，摇摇晃晃也能跑很远。',shirt:0xffd246,pants:0xffd246,shoes:0xffd246,hair:0x443438,cap:0x83cab8,skin:0xf3c29e,hat:false},mia:{name:'胖猫',description:'胖猫 · 蓝色圆胖猫',detail:'蓝色大圆脸，带着小尾巴轻快出发。',shirt:0x5dace1,pants:0x5dace1,shoes:0xf5f8fc,hair:0x643d42,cap:0x9fabe1,skin:0xf1c4a8,hat:false},bei:{name:'猪猪侠',description:'猪猪侠 · 红衣小英雄',detail:'红衣、金手套，迈开步子勇敢往前。',shirt:0xed4f55,pants:0xed4f55,shoes:0xffcf51,hair:0x293447,cap:0xed4f55,skin:0xe6b397,hat:true}};
+const characterInfo={alo:{name:'奶龙',description:'奶龙 · 圆头大肚子',detail:'圆圆的脑袋，小小的嘴，晃着大肚子向前跑。',shirt:0xffd23b,pants:0xffd23b,shoes:0xffd23b,hair:0x443438,cap:0x83cab8,skin:0xf3c29e,hat:false},mia:{name:'胖猫',description:'胖猫 · 蓝紫表情包',detail:'粉色脸、大睫毛、红嘴唇，跑起来也很有戏。',shirt:0x514798,pants:0x514798,shoes:0xd7b1d6,hair:0x643d42,cap:0x9fabe1,skin:0xf1c4a8,hat:false},bei:{name:'猪猪侠',description:'猪猪侠 · 红衣小英雄',detail:'戴好红头盔，穿上黄靴子，勇敢地向前冲。',shirt:0xed4f55,pants:0xed4f55,shoes:0xffcf51,hair:0x293447,cap:0xed4f55,skin:0xe6b397,hat:true}};
 const hex=n=>'#'+n.toString(16).padStart(6,'0');const clothing={};function defaultClothes(c){return{shirt:hex(c.shirt),pants:hex(c.pants),hat:hex(c.cap),shoes:hex(c.shoes),pattern:'plain',wearHat:c.hat};}for(const [id,c]of Object.entries(characterInfo))clothing[id]=defaultClothes(c);try{const stored=JSON.parse(localStorage.getItem('nightline-clothing-v2')||'{}');for(const id of Object.keys(clothing)){const outfit=stored[id];if(!outfit)continue;for(const key of ['shirt','pants','hat','shoes'])if(/^#[a-fA-F0-9]{6}$/.test(outfit[key]))clothing[id][key]=outfit[key];if(['plain','stripe','colorblock'].includes(outfit.pattern))clothing[id].pattern=outfit.pattern;if(typeof outfit.wearHat==='boolean')clothing[id].wearHat=outfit.wearHat;}}catch{}
+// Refresh untouched old defaults once; an existing DIY combination keeps every chosen color.
+try{if(localStorage.getItem('nightline-character-palette-v3')!=='yes'){const legacy={alo:{shirt:'#ffd246',pants:'#ffd246',hat:'#83cab8',shoes:'#ffd246',pattern:'plain',wearHat:false},mia:{shirt:'#5dace1',pants:'#5dace1',hat:'#9fabe1',shoes:'#f5f8fc',pattern:'plain',wearHat:false}};for(const [id,old]of Object.entries(legacy))if(Object.entries(old).every(([key,value])=>clothing[id][key]===value))clothing[id]=defaultClothes(characterInfo[id]);localStorage.setItem('nightline-character-palette-v3','yes');}}catch{}
 let shirtTexture=null;function applyPattern(pattern){if(shirtTexture){shirtTexture.dispose();shirtTexture=null;}if(pattern==='plain'){shirtMat.map=null;shirtMat.needsUpdate=true;return;}const c=document.createElement('canvas');c.width=128;c.height=128;const ctx=c.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,128,128);ctx.fillStyle=pattern==='stripe'?'#607088':'#697b95';if(pattern==='stripe')for(let y=26;y<113;y+=23)ctx.fillRect(0,y,128,8);else ctx.fillRect(0,78,128,50);shirtTexture=new THREE.CanvasTexture(c);shirtTexture.colorSpace=THREE.SRGBColorSpace;shirtMat.map=shirtTexture;shirtMat.needsUpdate=true;}
 function applyOutfit(){const c=characterInfo[selectedCharacter],outfit=clothing[selectedCharacter];shirtMat.color.set(outfit.shirt);pantsMat.color.set(outfit.pants);shoesMat.color.set(outfit.shoes);capMat.color.set(outfit.hat);applyPattern(outfit.pattern);for(const [id,m]of Object.entries(mascots))m.body.visible=id===selectedCharacter;body=mascots[selectedCharacter].body;limbs=mascots[selectedCharacter].limbs;const a=mascots[selectedCharacter].accessories;for(const [type,g]of Object.entries(a))g.visible=type==='cap'?outfit.wearHat:type===selectedGear;$('character-description').textContent=c.description;$('preview-character-name').textContent=c.name;$('preview-character-detail').textContent=c.detail;$('outfit-summary').textContent=c.name+' · '+{none:'原装',star:'星徽',cat:'猫耳',phones:'耳机',crown:'星冠'}[selectedGear];$('wear-hat').checked=outfit.wearHat;$('crown-lock').hidden=unlockedCrown;const crownButton=document.querySelector('[data-gear="crown"]');crownButton.disabled=!unlockedCrown;crownButton.title=unlockedCrown?'已解锁星冠':'单局达到 1500 分解锁星冠';for(const part of ['shirt','pants','hat','shoes'])$(part+'-color').value=outfit[part];document.querySelectorAll('[data-pattern]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pattern===outfit.pattern)));document.querySelectorAll('[data-character]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.character===selectedCharacter)));document.querySelectorAll('[data-gear]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gear===selectedGear)));refreshPortrait();try{localStorage.setItem('nightline-outfit-v1',JSON.stringify({character:selectedCharacter,gear:selectedGear}));localStorage.setItem('nightline-clothing-v2',JSON.stringify(clothing));}catch{}}
 for(const part of ['shirt','pants','hat','shoes'])$(part+'-color').addEventListener('input',event=>{clothing[selectedCharacter][part]=event.target.value;if(part==='hat')clothing[selectedCharacter].wearHat=true;applyOutfit();});$('wear-hat').addEventListener('change',event=>{clothing[selectedCharacter].wearHat=event.target.checked;applyOutfit();});document.querySelectorAll('[data-pattern]').forEach(b=>b.addEventListener('click',()=>{clothing[selectedCharacter].pattern=b.dataset.pattern;applyOutfit();}));$('reset-outfit').addEventListener('click',()=>{clothing[selectedCharacter]=defaultClothes(characterInfo[selectedCharacter]);applyOutfit();});
@@ -609,7 +719,7 @@ function home(){state.reset();clearItems();shell.className='game-shell';for(cons
 function openWardrobe(){if(state.mode!=='ready')return;wardrobeOpen=true;previewAngle=Math.PI+.15;$('wardrobe-overlay').hidden=false;shell.classList.add('is-wardrobe');previewObjects.forEach(g=>g.visible=false);$('close-wardrobe').focus();}
 function closeWardrobe(){wardrobeOpen=false;$('wardrobe-overlay').hidden=true;shell.classList.remove('is-wardrobe');previewObjects.forEach(g=>g.visible=true);$('wardrobe-button').focus();}
 $('wardrobe-button').addEventListener('click',openWardrobe);$('close-wardrobe').addEventListener('click',closeWardrobe);$('wardrobe-done').addEventListener('click',closeWardrobe);$('revive-button').addEventListener('click',revive);$('finish-button').addEventListener('click',finish);
-let rotationDrag=null;$('wardrobe-viewer').addEventListener('pointerdown',e=>{rotationDrag={x:e.clientX,angle:previewAngle};e.currentTarget.setPointerCapture(e.pointerId);});$('wardrobe-viewer').addEventListener('pointermove',e=>{if(rotationDrag)previewAngle=rotationDrag.angle+(e.clientX-rotationDrag.x)*.012;});$('wardrobe-viewer').addEventListener('pointerup',()=>rotationDrag=null);$('wardrobe-viewer').addEventListener('pointercancel',()=>rotationDrag=null);
+let rotationDrag=null;$('wardrobe-viewer').addEventListener('pointerdown',e=>{e.preventDefault();rotationDrag={x:e.clientX,angle:previewAngle};e.currentTarget.setPointerCapture(e.pointerId);});$('wardrobe-viewer').addEventListener('pointermove',e=>{if(rotationDrag)previewAngle=rotationDrag.angle+(e.clientX-rotationDrag.x)*.012;});$('wardrobe-viewer').addEventListener('pointerup',()=>rotationDrag=null);$('wardrobe-viewer').addEventListener('pointercancel',()=>rotationDrag=null);
 function action(type){if(!$('board-overlay').hidden)return;if(state.action(type))sound(type==='jump'?'jump':'move');}
 $('start-button').addEventListener('click',start);$('restart-button').addEventListener('click',start);$('pause-restart').addEventListener('click',start);$('resume-button').addEventListener('click',resume);$('pause-button').addEventListener('click',pause);$('home-button').addEventListener('click',home);
 $('sound-button').addEventListener('click',()=>{soundEnabled=!soundEnabled;$('sound-button').setAttribute('aria-label',soundEnabled?'关闭音效':'开启音效');$('sound-button').setAttribute('aria-pressed',String(soundEnabled));$('sound-button').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4Z'+(soundEnabled?'m5-12a6 6 0 0 1 0 10m3-13a10 10 0 0 1 0 16':'m6-10 4 6m0-6-4 6')+'"/></svg>';if(soundEnabled)sound('power');});
